@@ -8,11 +8,14 @@ type Props = {
   isDark: boolean;
   onDrag: () => void;
   onDrop: () => void;
+  dragging: boolean;
 };
 
-type State = {};
+type State = {
+  dragging: boolean;
+};
 
-export default class IconTest extends React.Component<Props, State> {
+export default class Pawn extends React.Component<Props, State> {
   private CircleRef: SVGEllipseElement | null = null;
   private BaseRef: SVGPathElement | null = null;
   private BackRef: SVGPathElement | null = null;
@@ -95,6 +98,8 @@ export default class IconTest extends React.Component<Props, State> {
           ref={ref => (this.OverlayRef = ref)}
           onMouseDown={this.props.onDrag}
           onMouseUp={this.props.onDrop}
+          onTouchStart={this.props.onDrag}
+          onTouchEnd={this.props.onDrop}
         />
       </g>
     );

@@ -24,8 +24,8 @@ type Props = {
   PosOffset: [number, number];
   isDark: boolean;
   active: boolean;
-  id: string;
-  onClick?: (id: string) => void;
+  id: number;
+  onClick?: (id: number) => void;
 };
 
 type State = {};
@@ -37,6 +37,7 @@ export default class IconTest extends React.Component<Props, State> {
   private RightRef: SVGPolygonElement | null = null;
   private BaseRef: SVGPolygonElement | null = null;
   private OverlayRef: SVGPolygonElement | null = null;
+  private HoverRef: SVGPathElement | null = null;
 
   HighlightOn = (): TimelineMax => {
     let tl = new TimelineMax();
@@ -297,6 +298,11 @@ export default class IconTest extends React.Component<Props, State> {
   `;
   Overlay = styled.polygon`
     opacity: 0;
+    z-index: 2;
+  `;
+  Hover = styled.path`
+    opacity: 0;
+    fill: red;
   `;
   Stroke = styled.polygon`
     fill: ${this.props.isDark
@@ -330,10 +336,8 @@ export default class IconTest extends React.Component<Props, State> {
   componentDidUpdate(prevProps: Props) {
     if (prevProps.active !== this.props.active) {
       if (this.props.active) {
-        console.log('active');
         this.makeActive();
       } else {
-        console.log('inactive');
         this.makeInactive();
       }
     }

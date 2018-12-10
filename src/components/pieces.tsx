@@ -1,12 +1,15 @@
 import React from 'react';
 
 import { piece, colour } from '../util/Models/piece';
-import { position, getPosCoords } from '../util/Models/position';
 import DragContainer from './dragContainer';
 
 type Props = {
-  pieces: { name: piece; colour: colour; position: position }[];
-  mousePosition: { x: number; y: number };
+  pieces: {
+    name: piece;
+    colour: colour;
+    position: [number, number];
+    gameBoardPosition: number;
+  }[];
   svgRef: SVGSVGElement;
 };
 
@@ -23,6 +26,7 @@ export default class TEMPLATE extends React.Component<Props, State> {
             position={piece.position}
             key={index}
             svgRef={this.props.svgRef}
+            gameboardPosition={piece.gameBoardPosition}
           />
         ))}
       </g>

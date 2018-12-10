@@ -1,7 +1,13 @@
+import Chess from 'chess';
+
 export interface State {
-  readonly Colour: string;
+  readonly ActiveTiles: Array<number>;
+  readonly Board: Uint8Array;
+  readonly HoveredTileID: number | undefined;
 }
 
 export const InitialState: State = {
-  Colour: ''
+  ActiveTiles: [],
+  Board: Chess.Board(),
+  HoveredTileID: undefined
 };
