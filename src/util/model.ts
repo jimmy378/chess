@@ -145,20 +145,3 @@ export const CenterCoords = [
   [800, 1034],
   [900, 1092]
 ];
-
-export const getPosFromCoords = (
-  coords: [number, number]
-): number | undefined => {
-  let index = CenterCoords.findIndex(
-    x =>
-      x[0] < coords[0] + 50 &&
-      x[0] > coords[0] - 50 &&
-      x[1] < coords[1] + 50 &&
-      x[1] > coords[1] - 50
-  );
-  if (index !== -1) {
-    return index;
-  } else {
-    return undefined;
-  }
-};

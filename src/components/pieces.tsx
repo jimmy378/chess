@@ -1,25 +1,23 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { AppState } from '../store/ApplicationState';
+import { Actions, ConnectedReduxThunkProps } from '../store';
 
-import { piece, colour } from '../util/Models/piece';
+import { getPieces } from '../util';
 import DragContainer from './dragContainer';
 
 type Props = {
-  pieces: {
-    name: piece;
-    colour: colour;
-    position: [number, number];
-    gameBoardPosition: number;
-  }[];
   svgRef: SVGSVGElement;
-};
+} & AppState &
+  ConnectedReduxThunkProps;
 
 type State = {};
 
-export default class TEMPLATE extends React.Component<Props, State> {
+class Pieces extends React.Component<Props, State> {
   render() {
     return (
       <g>
-        {this.props.pieces.map((piece, index) => (
+        {getPieces(this.props.Game.Board).map((piece, index) => (
           <DragContainer
             piece={piece.name}
             colour={piece.colour}
@@ -27,9 +25,14 @@ export default class TEMPLATE extends React.Component<Props, State> {
             key={index}
             svgRef={this.props.svgRef}
             gameboardPosition={piece.gameBoardPosition}
+            isTurn={piece.isTurn}
           />
         ))}
       </g>
     );
   }
 }
+
+const mapStateToProps = (state: AppState): AppState => state;
+
+export default connect(mapStateToProps)(Pieces);

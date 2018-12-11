@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Pawn from './pawn';
-import { piece, colour, getPosFromCoords } from '../util/Models/piece';
+import { piece, colour } from '../util/model';
+import { getPosFromCoords } from '../util';
 import { connect } from 'react-redux';
 import { AppState } from '../store/ApplicationState';
 import { Actions, ConnectedReduxThunkProps } from '../store';
@@ -13,6 +14,7 @@ type Props = {
   position: [number, number];
   svgRef: SVGSVGElement;
   gameboardPosition: number;
+  isTurn: boolean;
 } & AppState &
   ConnectedReduxThunkProps;
 
@@ -115,6 +117,12 @@ class DragContainer extends React.Component<Props, State> {
             onDrop={this.onDrop}
             dragging={this.state.dragging}
             ref={this.ref}
+            draggable={this.props.isTurn}
+            active={
+              this.props.Game.ActiveTiles.indexOf(
+                this.props.gameboardPosition
+              ) > -1
+            }
           />
         );
       case piece.Rook:
@@ -130,6 +138,12 @@ class DragContainer extends React.Component<Props, State> {
             onDrop={this.onDrop}
             dragging={this.state.dragging}
             ref={this.ref}
+            draggable={this.props.isTurn}
+            active={
+              this.props.Game.ActiveTiles.indexOf(
+                this.props.gameboardPosition
+              ) > -1
+            }
           />
         );
       case piece.Knight:
@@ -145,6 +159,12 @@ class DragContainer extends React.Component<Props, State> {
             onDrop={this.onDrop}
             dragging={this.state.dragging}
             ref={this.ref}
+            draggable={this.props.isTurn}
+            active={
+              this.props.Game.ActiveTiles.indexOf(
+                this.props.gameboardPosition
+              ) > -1
+            }
           />
         );
       case piece.Bishop:
@@ -160,6 +180,12 @@ class DragContainer extends React.Component<Props, State> {
             onDrop={this.onDrop}
             dragging={this.state.dragging}
             ref={this.ref}
+            draggable={this.props.isTurn}
+            active={
+              this.props.Game.ActiveTiles.indexOf(
+                this.props.gameboardPosition
+              ) > -1
+            }
           />
         );
       case piece.Queen:
@@ -175,6 +201,12 @@ class DragContainer extends React.Component<Props, State> {
             onDrop={this.onDrop}
             dragging={this.state.dragging}
             ref={this.ref}
+            draggable={this.props.isTurn}
+            active={
+              this.props.Game.ActiveTiles.indexOf(
+                this.props.gameboardPosition
+              ) > -1
+            }
           />
         );
       case piece.King:
@@ -190,6 +222,12 @@ class DragContainer extends React.Component<Props, State> {
             onDrop={this.onDrop}
             dragging={this.state.dragging}
             ref={this.ref}
+            draggable={this.props.isTurn}
+            active={
+              this.props.Game.ActiveTiles.indexOf(
+                this.props.gameboardPosition
+              ) > -1
+            }
           />
         );
     }

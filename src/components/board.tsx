@@ -5,10 +5,7 @@ import { Actions, ConnectedReduxThunkProps } from '../store';
 
 import Tile from './tile';
 
-type Props = {
-  clickedTile: (id: number) => void;
-} & AppState &
-  ConnectedReduxThunkProps;
+type Props = {} & AppState & ConnectedReduxThunkProps;
 
 type State = {};
 
@@ -30,7 +27,6 @@ class Board extends React.Component<Props, State> {
                 active={this.props.Game.ActiveTiles.indexOf(row + column) > -1}
                 key={index}
                 id={row + column}
-                onClick={this.props.clickedTile}
               />
             ))}
           </g>
