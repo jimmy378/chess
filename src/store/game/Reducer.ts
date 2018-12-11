@@ -11,9 +11,6 @@ export const Reducer = (state: State = InitialState, action: Action): State => {
     case getType(Actions.setActiveTiles):
       return { ...state, ActiveTiles: action.payload };
 
-    case getType(Actions.setHoveredTileId):
-      return { ...state, HoveredTileID: action.payload };
-
     default:
       return state;
   }

@@ -18,6 +18,7 @@ type Props = {
 
 type State = {
   mousePosition: [number, number];
+  truePosition: [number, number];
   dragging: boolean;
 };
 
@@ -28,6 +29,7 @@ class DragContainer extends React.Component<Props, State> {
 
   state: State = {
     mousePosition: [0, 0],
+    truePosition: [0, 0],
     dragging: false
   };
 
@@ -40,12 +42,8 @@ class DragContainer extends React.Component<Props, State> {
       (e.clientX - CTM!.e) / CTM!.a,
       (e.clientY - CTM!.f) / CTM!.d
     ];
+    this.setState({ truePosition: pos });
     this.setState({ mousePosition: [pos[0] - 60, pos[1] - 120] });
-    // TODO: fix performance
-    let highlightedTile = getPosFromCoords(pos);
-    if (highlightedTile !== this.props.Game.HoveredTileID) {
-      this.props.dispatch(Actions.Game.setHoveredTileId(highlightedTile));
-    }
   };
 
   onTouchMove = (e: TouchEvent) => {
@@ -57,12 +55,8 @@ class DragContainer extends React.Component<Props, State> {
       (e.touches[0].clientX - CTM!.e) / CTM!.a,
       (e.touches[0].clientY - CTM!.f) / CTM!.d
     ];
+    this.setState({ truePosition: pos });
     this.setState({ mousePosition: [pos[0] - 60, pos[1] - 120] });
-    // TODO: fix performance
-    let highlightedTile = getPosFromCoords(pos);
-    if (highlightedTile !== this.props.Game.HoveredTileID) {
-      this.props.dispatch(Actions.Game.setHoveredTileId(highlightedTile));
-    }
   };
 
   onDrag = () => {
@@ -81,6 +75,9 @@ class DragContainer extends React.Component<Props, State> {
   };
 
   onDrop = () => {
+    let highlightedTile = getPosFromCoords(this.state.truePosition);
+    console.log(highlightedTile);
+
     let domNode = ReactDOM.findDOMNode(this.ref.current!)!;
     this.parent!.insertBefore(domNode, this.sibling);
     window.removeEventListener('mousemove', this.onMouseMove);
@@ -92,13 +89,10 @@ class DragContainer extends React.Component<Props, State> {
       this.props.gameboardPosition
     );
 
-    if (
-      [...possibleMoves].findIndex(x => x === this.props.Game.HoveredTileID) !==
-      -1
-    ) {
+    if ([...possibleMoves].findIndex(x => x === highlightedTile) !== -1) {
       let newBoard = Chess.applyMove(this.props.Game.Board, [
         this.props.gameboardPosition,
-        this.props.Game.HoveredTileID!
+        highlightedTile!
       ]);
       this.props.dispatch(Actions.Game.setBoard(newBoard));
     }

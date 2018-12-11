@@ -10,10 +10,3 @@ export const setActiveTiles = createAction(
     return (tiles: number[]) => resolve(tiles);
   }
 );
-
-export const setHoveredTileId = createAction(
-  '@game/SET_HOVERED_TILE_ID',
-  resolve => {
-    return (id: number | undefined) => resolve(id);
-  }
-);
