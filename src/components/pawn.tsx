@@ -196,7 +196,11 @@ export default class Pawn extends React.Component<Props, State> {
       : Colours.whiteLight.two};
   `;
   Overlay = styled.path`
-    opacity: 0;
+    fill: transparent;
+    stroke: ${this.props.isDark
+      ? Colours.blackDark.three
+      : Colours.whiteDark.four};
+    stroke-width: 5px;
     cursor: move;
   `;
 

@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import ReactDOM from 'react-dom';
+
 import Pawn from './pawn';
+import Rook from './rook';
+import KnightWhite from './knightWhite';
+import KnightBlack from './knightBlack';
+import Bishop from './bishop';
+import Queen from './queen';
+import King from './king';
+
 import { piece, colour } from '../util/model';
 import { getPosFromCoords } from '../util';
 import { connect } from 'react-redux';
@@ -25,7 +33,7 @@ type State = {
 };
 
 class DragContainer extends React.Component<Props, State> {
-  ref: React.RefObject<Pawn> = React.createRef();
+  ref: React.RefObject<any> = React.createRef();
   parent: ParentNode & Node | null = null;
   sibling: Node | null = null;
 
@@ -127,7 +135,7 @@ class DragContainer extends React.Component<Props, State> {
         );
       case piece.Rook:
         return (
-          <Pawn
+          <Rook
             isDark={this.props.colour === colour.Black}
             PosOffset={
               this.state.dragging
@@ -147,9 +155,28 @@ class DragContainer extends React.Component<Props, State> {
           />
         );
       case piece.Knight:
-        return (
-          <Pawn
-            isDark={this.props.colour === colour.Black}
+        return this.props.colour === colour.White ? (
+          <KnightWhite
+            isDark={false}
+            PosOffset={
+              this.state.dragging
+                ? this.state.mousePosition
+                : this.props.position
+            }
+            onDrag={this.onDrag}
+            onDrop={this.onDrop}
+            dragging={this.state.dragging}
+            ref={this.ref}
+            draggable={this.props.isTurn}
+            active={
+              this.props.Game.ActiveTiles.indexOf(
+                this.props.gameboardPosition
+              ) > -1
+            }
+          />
+        ) : (
+          <KnightBlack
+            isDark={true}
             PosOffset={
               this.state.dragging
                 ? this.state.mousePosition
@@ -169,7 +196,7 @@ class DragContainer extends React.Component<Props, State> {
         );
       case piece.Bishop:
         return (
-          <Pawn
+          <Bishop
             isDark={this.props.colour === colour.Black}
             PosOffset={
               this.state.dragging
@@ -190,7 +217,7 @@ class DragContainer extends React.Component<Props, State> {
         );
       case piece.Queen:
         return (
-          <Pawn
+          <Queen
             isDark={this.props.colour === colour.Black}
             PosOffset={
               this.state.dragging
@@ -211,7 +238,7 @@ class DragContainer extends React.Component<Props, State> {
         );
       case piece.King:
         return (
-          <Pawn
+          <King
             isDark={this.props.colour === colour.Black}
             PosOffset={
               this.state.dragging

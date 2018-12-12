@@ -46,7 +46,7 @@ export const getPieces = (gameBoard: Uint8Array) => {
         case Chess.codes.pieces.white.rook:
           pieces.push({
             colour: colour.White,
-            name: piece.pawn,
+            name: piece.Rook,
             position: Coords[i] as [number, number],
             gameBoardPosition: i,
             isTurn: whitesMove === 'W'
@@ -55,7 +55,7 @@ export const getPieces = (gameBoard: Uint8Array) => {
         case Chess.codes.pieces.white.knight:
           pieces.push({
             colour: colour.White,
-            name: piece.pawn,
+            name: piece.Knight,
             position: Coords[i] as [number, number],
             gameBoardPosition: i,
             isTurn: whitesMove === 'W'
@@ -64,7 +64,7 @@ export const getPieces = (gameBoard: Uint8Array) => {
         case Chess.codes.pieces.white.bishop:
           pieces.push({
             colour: colour.White,
-            name: piece.pawn,
+            name: piece.Bishop,
             position: Coords[i] as [number, number],
             gameBoardPosition: i,
             isTurn: whitesMove === 'W'
@@ -73,7 +73,7 @@ export const getPieces = (gameBoard: Uint8Array) => {
         case Chess.codes.pieces.white.queen:
           pieces.push({
             colour: colour.White,
-            name: piece.pawn,
+            name: piece.Queen,
             position: Coords[i] as [number, number],
             gameBoardPosition: i,
             isTurn: whitesMove === 'W'
@@ -82,7 +82,7 @@ export const getPieces = (gameBoard: Uint8Array) => {
         case Chess.codes.pieces.white.king:
           pieces.push({
             colour: colour.White,
-            name: piece.pawn,
+            name: piece.King,
             position: Coords[i] as [number, number],
             gameBoardPosition: i,
             isTurn: whitesMove === 'W'
@@ -105,7 +105,7 @@ export const getPieces = (gameBoard: Uint8Array) => {
         case Chess.codes.pieces.black.rook:
           pieces.push({
             colour: colour.Black,
-            name: piece.pawn,
+            name: piece.Rook,
             position: Coords[i] as [number, number],
             gameBoardPosition: i,
             isTurn: whitesMove !== 'W'
@@ -114,7 +114,7 @@ export const getPieces = (gameBoard: Uint8Array) => {
         case Chess.codes.pieces.black.knight:
           pieces.push({
             colour: colour.Black,
-            name: piece.pawn,
+            name: piece.Knight,
             position: Coords[i] as [number, number],
             gameBoardPosition: i,
             isTurn: whitesMove !== 'W'
@@ -123,7 +123,7 @@ export const getPieces = (gameBoard: Uint8Array) => {
         case Chess.codes.pieces.black.bishop:
           pieces.push({
             colour: colour.Black,
-            name: piece.pawn,
+            name: piece.Bishop,
             position: Coords[i] as [number, number],
             gameBoardPosition: i,
             isTurn: whitesMove !== 'W'
@@ -132,7 +132,7 @@ export const getPieces = (gameBoard: Uint8Array) => {
         case Chess.codes.pieces.black.queen:
           pieces.push({
             colour: colour.Black,
-            name: piece.pawn,
+            name: piece.Queen,
             position: Coords[i] as [number, number],
             gameBoardPosition: i,
             isTurn: whitesMove !== 'W'
@@ -141,7 +141,7 @@ export const getPieces = (gameBoard: Uint8Array) => {
         case Chess.codes.pieces.black.king:
           pieces.push({
             colour: colour.Black,
-            name: piece.pawn,
+            name: piece.King,
             position: Coords[i] as [number, number],
             gameBoardPosition: i,
             isTurn: whitesMove !== 'W'
@@ -152,6 +152,6 @@ export const getPieces = (gameBoard: Uint8Array) => {
       }
     }
   }
-  console.log(pieces);
+  console.log(Chess.Board.toString(gameBoard));
   return pieces;
 };

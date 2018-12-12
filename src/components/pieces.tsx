@@ -14,6 +14,10 @@ type Props = {
 type State = {};
 
 class Pieces extends React.Component<Props, State> {
+  shouldComponentUpdate(nextProps: Props, nextState: State) {
+    return nextProps.Game.Board !== this.props.Game.Board;
+  }
+
   render() {
     return (
       <g>
