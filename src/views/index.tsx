@@ -38,10 +38,6 @@ class App extends Component<Props, State> {
     this.props.dispatch(Actions.Game.setBoard(Chess.Board()));
   }
 
-  shouldComponentUpdate(nextProps: Props, nextState: State) {
-    return nextProps.Game.Board !== this.props.Game.Board;
-  }
-
   render() {
     return (
       <Flex>

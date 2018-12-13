@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { AppState } from '../store/ApplicationState';
 import { Actions, ConnectedReduxThunkProps } from '../store';
+import ReactDOM from 'react-dom';
 
 import { getPieces } from '../util';
 import DragContainer from './dragContainer';

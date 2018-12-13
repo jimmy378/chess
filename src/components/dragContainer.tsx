@@ -73,7 +73,6 @@ class DragContainer extends React.Component<Props, State> {
     let domNode = ReactDOM.findDOMNode(this.ref.current!)!;
     this.sibling = domNode.nextSibling!;
     this.parent = domNode.parentNode!;
-    domNode.remove();
     this.parent.appendChild(domNode);
     let possibleMoves = Chess.findMoves(
       this.props.Game.Board,
@@ -85,11 +84,11 @@ class DragContainer extends React.Component<Props, State> {
   };
 
   onDrop = () => {
+    this.props.dispatch(Actions.Game.setActiveTiles([]));
+
     let highlightedTile = getPosFromCoords(this.state.truePosition);
-    console.log(highlightedTile);
 
     let domNode = ReactDOM.findDOMNode(this.ref.current!)!;
-    this.parent!.insertBefore(domNode, this.sibling);
     window.removeEventListener('mousemove', this.onMouseMove);
     window.removeEventListener('touchmove', this.onTouchMove);
     this.setState({ dragging: false });
@@ -105,9 +104,9 @@ class DragContainer extends React.Component<Props, State> {
         highlightedTile!
       ]);
       this.props.dispatch(Actions.Game.setBoard(newBoard));
+    } else {
+      this.parent!.insertBefore(domNode, this.sibling);
     }
-
-    this.props.dispatch(Actions.Game.setActiveTiles([]));
   };
 
   getPiece = () => {
