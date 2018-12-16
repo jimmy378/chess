@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppState } from '../store/ApplicationState';
-import { Actions, ConnectedReduxThunkProps } from '../store';
-import ReactDOM from 'react-dom';
+import { ConnectedReduxThunkProps } from '../store';
 
 import { getPieces } from '../util';
 import DragContainer from './dragContainer';
+import Chess from 'chess';
+import { Actions } from '../store/game';
 
 type Props = {
   svgRef: SVGSVGElement;
@@ -19,18 +20,31 @@ class Pieces extends React.Component<Props, State> {
     return nextProps.Game.Board !== this.props.Game.Board;
   }
 
+  async componentDidUpdate(prevProps: Props, prevState: State) {
+    if (prevProps.Game.Board !== this.props.Game.Board) {
+      let whitesMove = String.fromCharCode(this.props.Game.Board[64]);
+      if (whitesMove !== 'W') {
+        let AiMove = await Chess.findAIMove(this.props.Game.Board, 0, 0.5);
+        if (AiMove) {
+          setTimeout(() => {
+            let newBoard = Chess.applyMove(this.props.Game.Board, AiMove!);
+            this.props.dispatch(
+              Actions.setBoard.action(newBoard, false, false)
+            );
+          }, 1000);
+        }
+      }
+    }
+  }
+
   render() {
     return (
       <g>
-        {getPieces(this.props.Game.Board).map((piece, index) => (
+        {this.props.Game.Pieces.map((piece, index) => (
           <DragContainer
-            piece={piece.name}
-            colour={piece.colour}
-            position={piece.position}
-            key={index}
+            piece={piece}
+            key={piece.id}
             svgRef={this.props.svgRef}
-            gameboardPosition={piece.gameBoardPosition}
-            isTurn={piece.isTurn}
           />
         ))}
       </g>

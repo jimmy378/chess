@@ -5,8 +5,11 @@ type Action = ActionType<typeof Actions>;
 
 export const Reducer = (state: State = InitialState, action: Action): State => {
   switch (action.type) {
-    case getType(Actions.setBoard):
+    case getType(Actions.setBoard.async.success):
       return { ...state, Board: action.payload };
+
+    case getType(Actions.setPieces):
+      return { ...state, Pieces: action.payload };
 
     case getType(Actions.setActiveTiles):
       return { ...state, ActiveTiles: action.payload };

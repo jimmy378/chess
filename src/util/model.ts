@@ -12,6 +12,15 @@ export enum colour {
   'Black'
 }
 
+export type PieceObject = {
+  colour: colour;
+  name: piece;
+  id: string;
+  position: [number, number];
+  gameBoardPosition: number;
+  isTurn: boolean;
+};
+
 export const Coords = [
   [840, 160],
   [940, 218],

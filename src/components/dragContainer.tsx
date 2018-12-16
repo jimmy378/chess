@@ -9,7 +9,7 @@ import Bishop from './bishop';
 import Queen from './queen';
 import King from './king';
 
-import { piece, colour } from '../util/model';
+import { piece, colour, PieceObject } from '../util/model';
 import { getPosFromCoords } from '../util';
 import { connect } from 'react-redux';
 import { AppState } from '../store/ApplicationState';
@@ -17,12 +17,8 @@ import { Actions, ConnectedReduxThunkProps } from '../store';
 import Chess from 'chess';
 
 type Props = {
-  piece: piece;
-  colour: colour;
-  position: [number, number];
+  piece: PieceObject;
   svgRef: SVGSVGElement;
-  gameboardPosition: number;
-  isTurn: boolean;
 } & AppState &
   ConnectedReduxThunkProps;
 
@@ -76,7 +72,7 @@ class DragContainer extends React.Component<Props, State> {
     this.parent.appendChild(domNode);
     let possibleMoves = Chess.findMoves(
       this.props.Game.Board,
-      this.props.gameboardPosition
+      this.props.piece.gameBoardPosition
     );
     this.props.dispatch(Actions.Game.setActiveTiles([...possibleMoves]));
     window.addEventListener('mousemove', this.onMouseMove);
@@ -95,39 +91,39 @@ class DragContainer extends React.Component<Props, State> {
 
     let possibleMoves = Chess.findMoves(
       this.props.Game.Board,
-      this.props.gameboardPosition
+      this.props.piece.gameBoardPosition
     );
 
     if ([...possibleMoves].findIndex(x => x === highlightedTile) !== -1) {
       let newBoard = Chess.applyMove(this.props.Game.Board, [
-        this.props.gameboardPosition,
+        this.props.piece.gameBoardPosition,
         highlightedTile!
       ]);
-      this.props.dispatch(Actions.Game.setBoard(newBoard));
+      this.props.dispatch(Actions.Game.setBoard.action(newBoard, false, false));
     } else {
       this.parent!.insertBefore(domNode, this.sibling);
     }
   };
 
   getPiece = () => {
-    switch (this.props.piece) {
+    switch (this.props.piece.name) {
       case piece.pawn:
         return (
           <Pawn
-            isDark={this.props.colour === colour.Black}
+            isDark={this.props.piece.colour === colour.Black}
             PosOffset={
               this.state.dragging
                 ? this.state.mousePosition
-                : this.props.position
+                : this.props.piece.position
             }
             onDrag={this.onDrag}
             onDrop={this.onDrop}
             dragging={this.state.dragging}
             ref={this.ref}
-            draggable={this.props.isTurn}
+            draggable={this.props.piece.isTurn}
             active={
               this.props.Game.ActiveTiles.indexOf(
-                this.props.gameboardPosition
+                this.props.piece.gameBoardPosition
               ) > -1
             }
           />
@@ -135,41 +131,41 @@ class DragContainer extends React.Component<Props, State> {
       case piece.Rook:
         return (
           <Rook
-            isDark={this.props.colour === colour.Black}
+            isDark={this.props.piece.colour === colour.Black}
             PosOffset={
               this.state.dragging
                 ? this.state.mousePosition
-                : this.props.position
+                : this.props.piece.position
             }
             onDrag={this.onDrag}
             onDrop={this.onDrop}
             dragging={this.state.dragging}
             ref={this.ref}
-            draggable={this.props.isTurn}
+            draggable={this.props.piece.isTurn}
             active={
               this.props.Game.ActiveTiles.indexOf(
-                this.props.gameboardPosition
+                this.props.piece.gameBoardPosition
               ) > -1
             }
           />
         );
       case piece.Knight:
-        return this.props.colour === colour.White ? (
+        return this.props.piece.colour === colour.White ? (
           <KnightWhite
             isDark={false}
             PosOffset={
               this.state.dragging
                 ? this.state.mousePosition
-                : this.props.position
+                : this.props.piece.position
             }
             onDrag={this.onDrag}
             onDrop={this.onDrop}
             dragging={this.state.dragging}
             ref={this.ref}
-            draggable={this.props.isTurn}
+            draggable={this.props.piece.isTurn}
             active={
               this.props.Game.ActiveTiles.indexOf(
-                this.props.gameboardPosition
+                this.props.piece.gameBoardPosition
               ) > -1
             }
           />
@@ -179,16 +175,16 @@ class DragContainer extends React.Component<Props, State> {
             PosOffset={
               this.state.dragging
                 ? this.state.mousePosition
-                : this.props.position
+                : this.props.piece.position
             }
             onDrag={this.onDrag}
             onDrop={this.onDrop}
             dragging={this.state.dragging}
             ref={this.ref}
-            draggable={this.props.isTurn}
+            draggable={this.props.piece.isTurn}
             active={
               this.props.Game.ActiveTiles.indexOf(
-                this.props.gameboardPosition
+                this.props.piece.gameBoardPosition
               ) > -1
             }
           />
@@ -196,20 +192,20 @@ class DragContainer extends React.Component<Props, State> {
       case piece.Bishop:
         return (
           <Bishop
-            isDark={this.props.colour === colour.Black}
+            isDark={this.props.piece.colour === colour.Black}
             PosOffset={
               this.state.dragging
                 ? this.state.mousePosition
-                : this.props.position
+                : this.props.piece.position
             }
             onDrag={this.onDrag}
             onDrop={this.onDrop}
             dragging={this.state.dragging}
             ref={this.ref}
-            draggable={this.props.isTurn}
+            draggable={this.props.piece.isTurn}
             active={
               this.props.Game.ActiveTiles.indexOf(
-                this.props.gameboardPosition
+                this.props.piece.gameBoardPosition
               ) > -1
             }
           />
@@ -217,20 +213,20 @@ class DragContainer extends React.Component<Props, State> {
       case piece.Queen:
         return (
           <Queen
-            isDark={this.props.colour === colour.Black}
+            isDark={this.props.piece.colour === colour.Black}
             PosOffset={
               this.state.dragging
                 ? this.state.mousePosition
-                : this.props.position
+                : this.props.piece.position
             }
             onDrag={this.onDrag}
             onDrop={this.onDrop}
             dragging={this.state.dragging}
             ref={this.ref}
-            draggable={this.props.isTurn}
+            draggable={this.props.piece.isTurn}
             active={
               this.props.Game.ActiveTiles.indexOf(
-                this.props.gameboardPosition
+                this.props.piece.gameBoardPosition
               ) > -1
             }
           />
@@ -238,20 +234,20 @@ class DragContainer extends React.Component<Props, State> {
       case piece.King:
         return (
           <King
-            isDark={this.props.colour === colour.Black}
+            isDark={this.props.piece.colour === colour.Black}
             PosOffset={
               this.state.dragging
                 ? this.state.mousePosition
-                : this.props.position
+                : this.props.piece.position
             }
             onDrag={this.onDrag}
             onDrop={this.onDrop}
             dragging={this.state.dragging}
             ref={this.ref}
-            draggable={this.props.isTurn}
+            draggable={this.props.piece.isTurn}
             active={
               this.props.Game.ActiveTiles.indexOf(
-                this.props.gameboardPosition
+                this.props.piece.gameBoardPosition
               ) > -1
             }
           />

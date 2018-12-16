@@ -28,6 +28,7 @@ export default class KnightWhite extends React.Component<Props, State> {
   private BackRef: SVGPathElement | null = null;
   private OverlayRef: SVGPathElement | null = null;
   private BounceRef: SVGGElement | null = null;
+  private PositionRef: SVGGElement | null = null;
 
   HighlightOn = (): TimelineMax => {
     let tl = new TimelineMax();
@@ -271,6 +272,38 @@ export default class KnightWhite extends React.Component<Props, State> {
     return tl;
   };
 
+  animatePosition = () => {
+    let tl = new TimelineMax();
+    tl.add('start').to(this.PositionRef!, 1, {
+      attr: {
+        transform: `translate(${this.props.PosOffset[0]} ${this.props
+          .PosOffset[1] - 32})`
+      },
+      ease: Power4.easeOut
+    });
+    return tl;
+  };
+
+  setDragPosition = () => {
+    TweenMax.set(this.PositionRef!, {
+      attr: {
+        transform: `translate(${this.props.PosOffset[0]} ${this.props
+          .PosOffset[1] - 32})`
+      }
+    });
+  };
+
+  setInitialPosition = () => {
+    let tl = new TimelineMax();
+    tl.add('start').to(this.PositionRef!, 1, {
+      attr: {
+        transform: `translate(${this.props.PosOffset[0]} ${this.props
+          .PosOffset[1] - 32})`
+      }
+    });
+    return tl;
+  };
+
   HairTop = styled.path`
     fill: ${this.props.isDark
       ? Colours.blackLight.one
@@ -332,12 +365,26 @@ export default class KnightWhite extends React.Component<Props, State> {
     this.HighlightOff().delay(0.2);
   };
 
+  componentDidMount() {
+    if (this.PositionRef) {
+      this.setInitialPosition();
+    }
+  }
+
   componentDidUpdate(prevProps: Props) {
     if (prevProps.active !== this.props.active) {
       if (this.props.active) {
         this.makeActive();
       } else {
         this.makeInactive();
+      }
+    }
+
+    if (prevProps.PosOffset !== this.props.PosOffset) {
+      if (this.props.dragging) {
+        this.setDragPosition();
+      } else {
+        this.animatePosition();
       }
     }
   }
@@ -362,10 +409,7 @@ export default class KnightWhite extends React.Component<Props, State> {
 
   render() {
     return (
-      <g
-        transform={`translate(${this.props.PosOffset[0]} ${this.props
-          .PosOffset[1] - 32})`}
-      >
+      <g ref={ref => (this.PositionRef = ref)}>
         <g ref={ref => (this.BounceRef = ref)}>
           <g transform={'translate(15 35) scale(0.75)'}>
             <this.Back

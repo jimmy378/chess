@@ -25,17 +25,13 @@ const Container = styled.div`
 `;
 
 type Props = {} & AppState & ConnectedReduxThunkProps;
-type State = {
-  activeTiles: number[];
-};
+type State = {};
 
 class App extends Component<Props, State> {
-  state: State = {
-    activeTiles: []
-  };
-
   componentWillMount() {
-    this.props.dispatch(Actions.Game.setBoard(Chess.Board()));
+    this.props.dispatch(
+      Actions.Game.setBoard.action(Chess.Board(), true, true)
+    );
   }
 
   render() {
