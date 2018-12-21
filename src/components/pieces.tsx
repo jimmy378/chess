@@ -16,10 +16,6 @@ type Props = {
 type State = {};
 
 class Pieces extends React.Component<Props, State> {
-  shouldComponentUpdate(nextProps: Props, nextState: State) {
-    return nextProps.Game.Board !== this.props.Game.Board;
-  }
-
   async componentDidUpdate(prevProps: Props, prevState: State) {
     if (prevProps.Game.Board !== this.props.Game.Board) {
       let whitesMove = String.fromCharCode(this.props.Game.Board[64]);

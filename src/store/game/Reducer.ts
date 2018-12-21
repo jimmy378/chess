@@ -8,6 +8,9 @@ export const Reducer = (state: State = InitialState, action: Action): State => {
     case getType(Actions.setBoard.async.success):
       return { ...state, Board: action.payload };
 
+    case getType(Actions.movePieceToFront.async.success):
+      return { ...state, Pieces: action.payload };
+
     case getType(Actions.setPieces):
       return { ...state, Pieces: action.payload };
 

@@ -25,18 +25,16 @@ type Props = {
 type State = {
   mousePosition: [number, number];
   truePosition: [number, number];
+  piecesBeforeDrag: PieceObject[];
   dragging: boolean;
 };
 
 class DragContainer extends React.Component<Props, State> {
-  ref: React.RefObject<any> = React.createRef();
-  parent: ParentNode & Node | null = null;
-  sibling: Node | null = null;
-
   state: State = {
     mousePosition: [0, 0],
     truePosition: [0, 0],
-    dragging: false
+    dragging: false,
+    piecesBeforeDrag: []
   };
 
   onMouseMove = (e: MouseEvent) => {
@@ -66,15 +64,13 @@ class DragContainer extends React.Component<Props, State> {
   };
 
   onDrag = () => {
-    let domNode = ReactDOM.findDOMNode(this.ref.current!)!;
-    this.sibling = domNode.nextSibling!;
-    this.parent = domNode.parentNode!;
-    this.parent.appendChild(domNode);
     let possibleMoves = Chess.findMoves(
       this.props.Game.Board,
       this.props.piece.gameBoardPosition
     );
+    this.setState({ piecesBeforeDrag: this.props.Game.Pieces });
     this.props.dispatch(Actions.Game.setActiveTiles([...possibleMoves]));
+    this.props.dispatch(Actions.Game.movePieceToFront.action(this.props.piece));
     window.addEventListener('mousemove', this.onMouseMove);
     window.addEventListener('touchmove', this.onTouchMove);
   };
@@ -84,7 +80,6 @@ class DragContainer extends React.Component<Props, State> {
 
     let highlightedTile = getPosFromCoords(this.state.truePosition);
 
-    let domNode = ReactDOM.findDOMNode(this.ref.current!)!;
     window.removeEventListener('mousemove', this.onMouseMove);
     window.removeEventListener('touchmove', this.onTouchMove);
     this.setState({ dragging: false });
@@ -101,7 +96,7 @@ class DragContainer extends React.Component<Props, State> {
       ]);
       this.props.dispatch(Actions.Game.setBoard.action(newBoard, false, false));
     } else {
-      this.parent!.insertBefore(domNode, this.sibling);
+      this.props.dispatch(Actions.Game.setPieces(this.state.piecesBeforeDrag));
     }
   };
 
@@ -119,7 +114,6 @@ class DragContainer extends React.Component<Props, State> {
             onDrag={this.onDrag}
             onDrop={this.onDrop}
             dragging={this.state.dragging}
-            ref={this.ref}
             draggable={this.props.piece.isTurn}
             active={
               this.props.Game.ActiveTiles.indexOf(
@@ -140,7 +134,6 @@ class DragContainer extends React.Component<Props, State> {
             onDrag={this.onDrag}
             onDrop={this.onDrop}
             dragging={this.state.dragging}
-            ref={this.ref}
             draggable={this.props.piece.isTurn}
             active={
               this.props.Game.ActiveTiles.indexOf(
@@ -161,7 +154,6 @@ class DragContainer extends React.Component<Props, State> {
             onDrag={this.onDrag}
             onDrop={this.onDrop}
             dragging={this.state.dragging}
-            ref={this.ref}
             draggable={this.props.piece.isTurn}
             active={
               this.props.Game.ActiveTiles.indexOf(
@@ -180,7 +172,6 @@ class DragContainer extends React.Component<Props, State> {
             onDrag={this.onDrag}
             onDrop={this.onDrop}
             dragging={this.state.dragging}
-            ref={this.ref}
             draggable={this.props.piece.isTurn}
             active={
               this.props.Game.ActiveTiles.indexOf(
@@ -201,7 +192,6 @@ class DragContainer extends React.Component<Props, State> {
             onDrag={this.onDrag}
             onDrop={this.onDrop}
             dragging={this.state.dragging}
-            ref={this.ref}
             draggable={this.props.piece.isTurn}
             active={
               this.props.Game.ActiveTiles.indexOf(
@@ -222,7 +212,6 @@ class DragContainer extends React.Component<Props, State> {
             onDrag={this.onDrag}
             onDrop={this.onDrop}
             dragging={this.state.dragging}
-            ref={this.ref}
             draggable={this.props.piece.isTurn}
             active={
               this.props.Game.ActiveTiles.indexOf(
@@ -243,7 +232,6 @@ class DragContainer extends React.Component<Props, State> {
             onDrag={this.onDrag}
             onDrop={this.onDrop}
             dragging={this.state.dragging}
-            ref={this.ref}
             draggable={this.props.piece.isTurn}
             active={
               this.props.Game.ActiveTiles.indexOf(

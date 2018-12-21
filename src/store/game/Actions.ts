@@ -17,9 +17,9 @@ export const setActiveTiles = createAction(
 
 export const setBoard = {
   async: createAsyncAction(
-    '@video/START_SET_BOARD',
-    '@video/BOARD_SET',
-    '@video/BOARD_SET_FAILED'
+    '@game/START_SET_BOARD',
+    '@game/BOARD_SET',
+    '@game/BOARD_SET_FAILED'
   )<undefined, Uint8Array, Error>(),
 
   action(newBoard: Uint8Array, isSame: boolean, calculatePieces: boolean) {
@@ -35,6 +35,31 @@ export const setBoard = {
         );
         dispatch(setPieces(pieces));
         dispatch(this.async.success(newBoard));
+      } catch (error) {
+        dispatch(this.async.failure(error));
+      }
+    };
+  }
+};
+
+export const movePieceToFront = {
+  async: createAsyncAction(
+    '@game/START_MOVE_PIECE_TO_FRONT',
+    '@game/PIECE_MOVED_TO_FRONT',
+    '@game/PIECE_MOVED_TO_FRONT_FAILED'
+  )<undefined, PieceObject[], Error>(),
+
+  action(piece: PieceObject) {
+    return async (dispatch: Dispatch, getState: () => AppState) => {
+      try {
+        dispatch(this.async.request());
+        let newPieces = [...getState().Game.Pieces];
+        let indexToRemove = newPieces.findIndex(x => x.id === piece.id);
+        if (indexToRemove !== -1) {
+          newPieces.splice(indexToRemove, 1);
+        }
+        newPieces.push(piece);
+        dispatch(this.async.success(newPieces));
       } catch (error) {
         dispatch(this.async.failure(error));
       }
