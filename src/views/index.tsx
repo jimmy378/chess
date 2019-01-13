@@ -11,17 +11,14 @@ import Canvas from '../components/canvas';
 import Board from '../components/board';
 import Pieces from '../components/pieces';
 
-const Flex = styled.div`
+const Container = styled.div`
   position: fixed;
   display: flex;
   width: 100%;
   height: 100%;
   align-items: center;
+  justify-content: center;
   background-color: ${Colours.purpleDark.five};
-`;
-
-const Container = styled.div`
-  width: 100%;
 `;
 
 type Props = {} & AppState & ConnectedReduxThunkProps;
@@ -36,18 +33,16 @@ class App extends Component<Props, State> {
 
   render() {
     return (
-      <Flex>
-        <Container>
-          <Canvas
-            render={canvasProps => (
-              <g>
-                <Board />
-                <Pieces svgRef={canvasProps.ref} />
-              </g>
-            )}
-          />
-        </Container>
-      </Flex>
+      <Container>
+        <Canvas
+          render={canvasProps => (
+            <g>
+              <Board />
+              <Pieces svgRef={canvasProps.ref} />
+            </g>
+          )}
+        />
+      </Container>
     );
   }
 }
