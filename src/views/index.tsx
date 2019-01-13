@@ -10,6 +10,7 @@ import Chess from 'chess';
 import Canvas from '../components/canvas';
 import Board from '../components/board';
 import Pieces from '../components/pieces';
+import TakenPieces from '../components/takenPieces';
 
 const Container = styled.div`
   position: fixed;
@@ -37,6 +38,8 @@ class App extends Component<Props, State> {
         <Canvas
           render={canvasProps => (
             <g>
+              <TakenPieces colour={colour.White} />
+              <TakenPieces colour={colour.Black} />
               <Board />
               <Pieces svgRef={canvasProps.ref} />
             </g>
