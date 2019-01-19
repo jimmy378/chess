@@ -28,18 +28,18 @@ export const Colours = {
     five: '#444444'
   },
   purpleLight: {
-    one: '#6a00ff',
-    two: '#6000e8',
-    three: '#5500ce',
-    four: '#4900b2',
-    five: '#3f009b'
+    one: '#FF005C',
+    two: '#D60076',
+    three: '#C70085',
+    four: '#A100BA',
+    five: '#7900AD'
   },
   purpleDark: {
-    one: '#6000e8',
-    two: '#5500ce',
-    three: '#4900b2',
-    four: '#3f009b',
-    five: '#33007f'
+    one: '#D60076',
+    two: '#C70085',
+    three: '#A100BA',
+    four: '#7900AD',
+    five: '#57009E'
   }
 };
 

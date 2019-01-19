@@ -21,6 +21,12 @@ export type PieceObject = {
   isTurn: boolean;
 };
 
+export enum Message {
+  whiteMove = 'White move',
+  blackMove = 'Black move',
+  blackMoveAi = 'Black move (A.I.)'
+}
+
 export const Coords = [
   [840, 160],
   [940, 218],

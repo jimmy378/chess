@@ -8,6 +8,15 @@ export const Reducer = (state: State = InitialState, action: Action): State => {
     case getType(Actions.setBoard.async.success):
       return { ...state, Board: action.payload };
 
+    case getType(Actions.setAiState):
+      return { ...state, AiOn: action.payload };
+
+    case getType(Actions.setDifficulty):
+      return { ...state, Difficulty: action.payload };
+
+    case getType(Actions.setMessage):
+      return { ...state, Message: action.payload };
+
     case getType(Actions.movePieceToFront.async.success):
       return { ...state, Pieces: action.payload };
 

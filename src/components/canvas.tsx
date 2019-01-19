@@ -1,4 +1,7 @@
 import React from 'react';
+import { styled } from '../util/styledComponents';
+
+const SVG = styled.svg``;
 
 type Props = {
   render(props: { ref: SVGSVGElement }): JSX.Element;
@@ -21,7 +24,7 @@ export default class Canvas extends React.Component<Props, State> {
 
   render() {
     return (
-      <svg
+      <SVG
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 1800 1400"
         width="100%"
@@ -29,7 +32,7 @@ export default class Canvas extends React.Component<Props, State> {
         ref={ref => (this.ref = ref)}
       >
         {this.props.render({ ref: this.state.ref })}
-      </svg>
+      </SVG>
     );
   }
 }

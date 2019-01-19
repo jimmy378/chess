@@ -1,4 +1,4 @@
-import { PieceObject } from './../../util/model';
+import { PieceObject, Message } from './../../util/model';
 import { AppState } from './../ApplicationState';
 import { createAction, createAsyncAction } from 'typesafe-actions';
 import { Dispatch } from 'redux';
@@ -6,6 +6,18 @@ import { getPiecesFromBoard } from '../../util';
 
 export const setPieces = createAction('@game/SET_PIECES', resolve => {
   return (pieces: PieceObject[]) => resolve(pieces);
+});
+
+export const setAiState = createAction('@game/SET_AI_STATE', resolve => {
+  return (state: boolean) => resolve(state);
+});
+
+export const setDifficulty = createAction('@game/SET_DIFFICULTY', resolve => {
+  return (value: number) => resolve(value);
+});
+
+export const setMessage = createAction('@game/SET_MESSAGE', resolve => {
+  return (message: Message) => resolve(message);
 });
 
 export const setActiveTiles = createAction(

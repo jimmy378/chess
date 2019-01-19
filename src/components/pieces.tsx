@@ -7,6 +7,7 @@ import { getPieces } from '../util';
 import DragContainer from './dragContainer';
 import Chess from 'chess';
 import { Actions } from '../store/game';
+import { Message } from '../util/model';
 
 type Props = {
   svgRef: SVGSVGElement;
@@ -19,8 +20,18 @@ class Pieces extends React.Component<Props, State> {
   async componentDidUpdate(prevProps: Props, prevState: State) {
     if (prevProps.Game.Board !== this.props.Game.Board) {
       let whitesMove = String.fromCharCode(this.props.Game.Board[64]);
-      if (whitesMove !== 'W') {
-        let AiMove = await Chess.findAIMove(this.props.Game.Board, 0, 0.5);
+      if (whitesMove !== 'W' && !this.props.Game.AiOn) {
+        this.props.dispatch(Actions.setMessage(Message.blackMove));
+      } else {
+        this.props.dispatch(Actions.setMessage(Message.whiteMove));
+      }
+      if (whitesMove !== 'W' && this.props.Game.AiOn) {
+        this.props.dispatch(Actions.setMessage(Message.blackMoveAi));
+        let AiMove = await Chess.findAIMove(
+          this.props.Game.Board,
+          this.props.Game.Difficulty,
+          0.5
+        );
         if (AiMove) {
           setTimeout(() => {
             let newBoard = Chess.applyMove(this.props.Game.Board, AiMove!);
