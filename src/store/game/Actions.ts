@@ -3,6 +3,7 @@ import { AppState } from './../ApplicationState';
 import { createAction, createAsyncAction } from 'typesafe-actions';
 import { Dispatch } from 'redux';
 import { getPiecesFromBoard } from '../../util';
+import Chess from 'chess';
 
 export const setPieces = createAction('@game/SET_PIECES', resolve => {
   return (pieces: PieceObject[]) => resolve(pieces);
@@ -46,6 +47,7 @@ export const setBoard = {
           isSame
         );
         dispatch(setPieces(pieces));
+        console.log(Chess.Board.toString(newBoard));
         dispatch(this.async.success(newBoard));
       } catch (error) {
         dispatch(this.async.failure(error));

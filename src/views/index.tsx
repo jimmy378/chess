@@ -21,13 +21,13 @@ const BG = styled.div`
   position: fixed;
   width: 100%;
   height: 100%;
-  background-color: ${Colours.purpleDark.five};
+  background-color: ${Colours.whiteLight.one};
 `;
 
 const Container = styled.div`
   position: fixed;
-  top: 70px;
-  bottom: 120px;
+  top: 0px;
+  bottom: 150px;
   display: flex;
   width: 100%;
   align-items: center;
@@ -36,6 +36,28 @@ const Container = styled.div`
 
 const Gap = styled.div`
   width: 20px;
+`;
+
+const GapTwo = styled.div`
+  width: 5px;
+`;
+
+const Text = styled.a`
+  padding: 0;
+  margin: 0;
+  font-size: 0.8em;
+  color: ${Colours.purpleLight.two};
+`;
+
+const Link = styled.a`
+  padding: 0;
+  margin: 0;
+  font-size: 0.8em;
+  color: ${Colours.whiteLight.one};
+`;
+
+const TextDivider = styled.div`
+  flex-grow: 1;
 `;
 
 type Props = {} & AppState & ConnectedReduxThunkProps;
@@ -59,7 +81,6 @@ class App extends Component<Props, State> {
   render() {
     return (
       <BG>
-        <Header />
         <Container>
           <Canvas
             render={canvasProps => (
@@ -85,6 +106,22 @@ class App extends Component<Props, State> {
             </>
           }
           top={<TextBox message={this.props.Game.Message} />}
+          credits={
+            <>
+              <Text>Design:</Text>
+              <GapTwo />
+              <Link href={'https://jimmy378.com'} target="_blank">
+                {' '}
+                jimmy378.com
+              </Link>
+              <TextDivider />
+              <Text>API:</Text>
+              <GapTwo />
+              <Link href={'https://andrewmorris.io/'} target="_blank">
+                andrewmorris.io
+              </Link>
+            </>
+          }
         />
       </BG>
     );

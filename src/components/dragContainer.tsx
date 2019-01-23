@@ -27,6 +27,7 @@ type State = {
   truePosition: [number, number];
   piecesBeforeDrag: PieceObject[];
   dragging: boolean;
+  pickedUP: boolean;
 };
 
 class DragContainer extends React.Component<Props, State> {
@@ -34,7 +35,8 @@ class DragContainer extends React.Component<Props, State> {
     mousePosition: [0, 0],
     truePosition: [0, 0],
     dragging: false,
-    piecesBeforeDrag: []
+    piecesBeforeDrag: [],
+    pickedUP: false
   };
 
   onMouseMove = (e: MouseEvent) => {
@@ -64,6 +66,7 @@ class DragContainer extends React.Component<Props, State> {
   };
 
   onDrag = () => {
+    this.setState({ pickedUP: true });
     let possibleMoves = Chess.findMoves(
       this.props.Game.Board,
       this.props.piece.gameBoardPosition
@@ -82,7 +85,7 @@ class DragContainer extends React.Component<Props, State> {
 
     window.removeEventListener('mousemove', this.onMouseMove);
     window.removeEventListener('touchmove', this.onTouchMove);
-    this.setState({ dragging: false });
+    this.setState({ dragging: false, pickedUP: false });
 
     let possibleMoves = Chess.findMoves(
       this.props.Game.Board,
@@ -120,6 +123,7 @@ class DragContainer extends React.Component<Props, State> {
                 this.props.piece.gameBoardPosition
               ) > -1
             }
+            pickedUp={this.state.pickedUP}
           />
         );
       case piece.Rook:
@@ -140,6 +144,7 @@ class DragContainer extends React.Component<Props, State> {
                 this.props.piece.gameBoardPosition
               ) > -1
             }
+            pickedUp={this.state.pickedUP}
           />
         );
       case piece.Knight:
@@ -160,6 +165,7 @@ class DragContainer extends React.Component<Props, State> {
                 this.props.piece.gameBoardPosition
               ) > -1
             }
+            pickedUp={this.state.pickedUP}
           />
         ) : (
           <KnightBlack
@@ -178,6 +184,7 @@ class DragContainer extends React.Component<Props, State> {
                 this.props.piece.gameBoardPosition
               ) > -1
             }
+            pickedUp={this.state.pickedUP}
           />
         );
       case piece.Bishop:
@@ -198,6 +205,7 @@ class DragContainer extends React.Component<Props, State> {
                 this.props.piece.gameBoardPosition
               ) > -1
             }
+            pickedUp={this.state.pickedUP}
           />
         );
       case piece.Queen:
@@ -218,6 +226,7 @@ class DragContainer extends React.Component<Props, State> {
                 this.props.piece.gameBoardPosition
               ) > -1
             }
+            pickedUp={this.state.pickedUP}
           />
         );
       case piece.King:
@@ -238,6 +247,7 @@ class DragContainer extends React.Component<Props, State> {
                 this.props.piece.gameBoardPosition
               ) > -1
             }
+            pickedUp={this.state.pickedUP}
           />
         );
     }

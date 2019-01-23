@@ -9,6 +9,7 @@ type Props = {
   onDrag: () => void;
   onDrop: () => void;
   dragging: boolean;
+  pickedUp: boolean;
   draggable: boolean;
   active: boolean;
 };
@@ -164,6 +165,19 @@ export default class King extends React.Component<Props, State> {
           ease: Power4.easeOut
         },
         'start'
+      )
+      .to(
+        this.OverlayRef!,
+        1,
+        {
+          css: {
+            stroke: this.props.isDark
+              ? Colours.purpleDark.four
+              : Colours.purpleLight.four
+          },
+          ease: Power4.easeOut
+        },
+        'start'
       );
     return tl;
   };
@@ -296,6 +310,19 @@ export default class King extends React.Component<Props, State> {
             fill: this.props.isDark
               ? Colours.blackLight.four
               : Colours.whiteLight.four
+          },
+          ease: Power4.easeOut
+        },
+        'start'
+      )
+      .to(
+        this.OverlayRef!,
+        1,
+        {
+          css: {
+            stroke: this.props.isDark
+              ? Colours.blackDark.three
+              : Colours.whiteDark.four
           },
           ease: Power4.easeOut
         },
@@ -449,6 +476,14 @@ export default class King extends React.Component<Props, State> {
         this.setDragPosition();
       } else {
         this.animatePosition();
+      }
+    }
+
+    if (prevProps.pickedUp !== this.props.pickedUp) {
+      if (this.props.pickedUp) {
+        this.makeActive();
+      } else {
+        this.makeInactive();
       }
     }
   }

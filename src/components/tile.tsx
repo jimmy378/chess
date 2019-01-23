@@ -61,8 +61,8 @@ export default class IconTest extends React.Component<Props, State> {
         {
           css: {
             fill: this.props.isDark
-              ? Colours.purpleDark.three
-              : Colours.purpleLight.three
+              ? Colours.purpleDark.four
+              : Colours.purpleLight.four
           },
           ease: Power4.easeOut
         },
@@ -103,7 +103,7 @@ export default class IconTest extends React.Component<Props, State> {
         css: {
           fill: this.props.isDark
             ? Colours.blackLight.two
-            : Colours.whiteLight.two
+            : Colours.whiteLight.four
         },
         ease: Power4.easeOut
       })
@@ -114,7 +114,7 @@ export default class IconTest extends React.Component<Props, State> {
           css: {
             fill: this.props.isDark
               ? Colours.blackLight.one
-              : Colours.whiteLight.one
+              : Colours.whiteLight.three
           },
           ease: Power4.easeOut
         },
@@ -127,7 +127,7 @@ export default class IconTest extends React.Component<Props, State> {
           css: {
             fill: this.props.isDark
               ? Colours.blackLight.three
-              : Colours.whiteLight.three
+              : Colours.whiteLight.five
           },
           ease: Power4.easeOut
         },
@@ -279,22 +279,22 @@ export default class IconTest extends React.Component<Props, State> {
   Base = styled.polygon`
     fill: ${this.props.isDark
       ? Colours.blackLight.one
-      : Colours.whiteLight.one};
+      : Colours.whiteLight.three};
   `;
   Left = styled.polygon`
     fill: ${this.props.isDark
       ? Colours.blackLight.two
-      : Colours.whiteLight.two};
+      : Colours.whiteLight.four};
   `;
   Right = styled.polygon`
     fill: ${this.props.isDark
       ? Colours.blackLight.three
-      : Colours.whiteLight.three};
+      : Colours.whiteLight.five};
   `;
   Top = styled.polygon`
     fill: ${this.props.isDark
-      ? Colours.purpleDark.one
-      : Colours.purpleLight.one};
+      ? Colours.purpleDark.three
+      : Colours.purpleLight.three};
   `;
   Overlay = styled.polygon`
     opacity: 0;
@@ -307,7 +307,7 @@ export default class IconTest extends React.Component<Props, State> {
   Stroke = styled.polygon`
     fill: ${this.props.isDark
       ? Colours.blackLight.one
-      : Colours.whiteLight.one};
+      : Colours.whiteLight.two};
     stroke: ${this.props.isDark
       ? Colours.purpleDark.five
       : Colours.purpleLight.five};

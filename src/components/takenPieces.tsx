@@ -51,65 +51,65 @@ class TakenPieces extends React.Component<Props, State> {
       case piece.pawn:
         if (pieces.length - reversePawnNumber() < 0) {
           return Piece.colour === colour.White
-            ? Theme.Colours.whiteLight.one
-            : Theme.Colours.blackLight.one;
+            ? Theme.Colours.purpleLight.one
+            : Theme.Colours.purpleDark.three;
         } else {
-          return Theme.Colours.purpleLight.four;
+          return Theme.Colours.whiteLight.three;
         }
       case piece.Rook:
         if (pieces.length >= 2) {
-          return Theme.Colours.purpleLight.four;
+          return Theme.Colours.whiteLight.three;
         } else if (pieces.length === 1) {
           return Piece.number === 1
             ? Piece.colour === colour.White
-              ? Theme.Colours.whiteLight.one
-              : Theme.Colours.blackLight.one
-            : Theme.Colours.purpleLight.four;
+              ? Theme.Colours.purpleLight.one
+              : Theme.Colours.purpleDark.three
+            : Theme.Colours.whiteLight.three;
         } else {
           return Piece.colour === colour.White
-            ? Theme.Colours.whiteLight.one
-            : Theme.Colours.blackLight.one;
+            ? Theme.Colours.purpleLight.one
+            : Theme.Colours.purpleDark.three;
         }
       case piece.Knight:
         if (pieces.length >= 2) {
-          return Theme.Colours.purpleLight.four;
+          return Theme.Colours.whiteLight.three;
         } else if (pieces.length === 1) {
           return Piece.number === 1
             ? Piece.colour === colour.White
-              ? Theme.Colours.whiteLight.one
-              : Theme.Colours.blackLight.one
-            : Theme.Colours.purpleLight.four;
+              ? Theme.Colours.purpleLight.one
+              : Theme.Colours.purpleDark.three
+            : Theme.Colours.whiteLight.three;
         } else {
           return Piece.colour === colour.White
-            ? Theme.Colours.whiteLight.one
-            : Theme.Colours.blackLight.one;
+            ? Theme.Colours.purpleLight.one
+            : Theme.Colours.purpleDark.three;
         }
       case piece.Bishop:
         if (pieces.length >= 2) {
-          return Theme.Colours.purpleLight.four;
+          return Theme.Colours.whiteLight.three;
         } else if (pieces.length === 1) {
           return Piece.number === 1
             ? Piece.colour === colour.White
-              ? Theme.Colours.whiteLight.one
-              : Theme.Colours.blackLight.one
-            : Theme.Colours.purpleLight.four;
+              ? Theme.Colours.purpleLight.one
+              : Theme.Colours.purpleDark.three
+            : Theme.Colours.whiteLight.three;
         } else {
           return Piece.colour === colour.White
-            ? Theme.Colours.whiteLight.one
-            : Theme.Colours.blackLight.one;
+            ? Theme.Colours.purpleLight.one
+            : Theme.Colours.purpleDark.three;
         }
       case piece.Queen:
         return pieces.length <= 0
           ? Piece.colour === colour.White
-            ? Theme.Colours.whiteLight.one
-            : Theme.Colours.blackLight.one
-          : Theme.Colours.purpleLight.four;
+            ? Theme.Colours.purpleLight.one
+            : Theme.Colours.purpleDark.three
+          : Theme.Colours.whiteLight.three;
       case piece.King:
         return pieces.length <= 0
           ? Piece.colour === colour.White
-            ? Theme.Colours.whiteLight.one
-            : Theme.Colours.blackLight.one
-          : Theme.Colours.purpleLight.four;
+            ? Theme.Colours.purpleLight.one
+            : Theme.Colours.purpleDark.three
+          : Theme.Colours.whiteLight.three;
     }
   };
 

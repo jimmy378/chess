@@ -8,7 +8,7 @@ import {
 } from 'redux';
 import thunkMiddleware, { ThunkMiddleware, ThunkDispatch } from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { createHashHistory } from 'history';
+import { createHashHistory, createBrowserHistory } from 'history';
 import {
   persistStore,
   persistReducer,
@@ -26,7 +26,7 @@ export { Actions };
 
 import { RootReducer } from './RootReducer';
 
-export const History = createHashHistory();
+export const History = createBrowserHistory();
 
 const JSOGTransform = createTransform(
   (inboundState, key) => jsog.serialize(inboundState),
