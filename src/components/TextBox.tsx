@@ -1,13 +1,12 @@
-import React from 'react';
-import { styled } from '../util/styledComponents';
-import { Colours } from '../util';
+import React from "react";
+import { styled } from "../util/styledComponents";
+import { Colours } from "../util";
 
 const Container = styled.div`
   box-sizing: border-box;
   width: 100%;
   padding-left: 10px;
   padding-right: 10px;
-  background-color: ${Colours.purpleLight.five};
   height: 30px;
   border-radius: 10px;
   display: flex;

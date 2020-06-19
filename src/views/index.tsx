@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import { styled } from '../util/styledComponents';
-import { Colours } from '../util/theme';
-import { piece, colour, Coords } from '../util/model';
-import { connect } from 'react-redux';
-import { AppState } from '../store/ApplicationState';
-import { Actions, ConnectedReduxThunkProps } from '../store';
-import Chess from 'chess';
+import React, { Component } from "react";
+import { styled } from "../util/styledComponents";
+import { Colours } from "../util/theme";
+import { piece, colour, Coords } from "../util/model";
+import { connect } from "react-redux";
+import { AppState } from "../store/ApplicationState";
+import { Actions, ConnectedReduxThunkProps } from "../store";
+import Chess from "chess";
 
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import Canvas from '../components/canvas';
-import Board from '../components/board';
-import Pieces from '../components/pieces';
-import TakenPieces from '../components/takenPieces';
-import Switch from '../components/Switch';
-import Slider from '../components/Slider';
-import TextBox from '../components/TextBox';
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import Canvas from "../components/canvas";
+import Board from "../components/board";
+import Pieces from "../components/pieces";
+import TakenPieces from "../components/takenPieces";
+import Switch from "../components/Switch";
+import Slider from "../components/Slider";
+import TextBox from "../components/TextBox";
 
 const BG = styled.div`
   position: fixed;
@@ -36,28 +36,6 @@ const Container = styled.div`
 
 const Gap = styled.div`
   width: 20px;
-`;
-
-const GapTwo = styled.div`
-  width: 5px;
-`;
-
-const Text = styled.a`
-  padding: 0;
-  margin: 0;
-  font-size: 0.8em;
-  color: ${Colours.purpleLight.two};
-`;
-
-const Link = styled.a`
-  padding: 0;
-  margin: 0;
-  font-size: 0.8em;
-  color: ${Colours.whiteLight.one};
-`;
-
-const TextDivider = styled.div`
-  flex-grow: 1;
 `;
 
 type Props = {} & AppState & ConnectedReduxThunkProps;
@@ -83,7 +61,7 @@ class App extends Component<Props, State> {
       <BG>
         <Container>
           <Canvas
-            render={canvasProps => (
+            render={(canvasProps) => (
               <g>
                 <TakenPieces colour={colour.White} />
                 <TakenPieces colour={colour.Black} />
@@ -106,22 +84,6 @@ class App extends Component<Props, State> {
             </>
           }
           top={<TextBox message={this.props.Game.Message} />}
-          credits={
-            <>
-              <Text>Design:</Text>
-              <GapTwo />
-              <Link href={'https://jimmy378.com'} target="_blank">
-                {' '}
-                jimmy378.com
-              </Link>
-              <TextDivider />
-              <Text>API:</Text>
-              <GapTwo />
-              <Link href={'https://andrewmorris.io/'} target="_blank">
-                andrewmorris.io
-              </Link>
-            </>
-          }
         />
       </BG>
     );

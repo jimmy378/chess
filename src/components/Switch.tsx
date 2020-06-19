@@ -1,7 +1,7 @@
-import React from 'react';
-import { styled } from '../util/styledComponents';
-import { Theme, Colours } from '../util';
-import { TweenLite, Power4 } from 'gsap';
+import React from "react";
+import { styled } from "../util/styledComponents";
+import { Theme, Colours } from "../util";
+import { TweenLite, Power4 } from "gsap";
 
 const Container = styled.div`
   display: flex;
@@ -9,10 +9,8 @@ const Container = styled.div`
   justify-content: center;
   height: 45px;
   width: 140px;
-  background-color: ${Colours.whiteLight.four};
+  background-color: ${Colours.purpleLight.four};
   border-radius: 10px;
-  border-bottom: 4px solid ${Colours.purpleLight.five};
-  box-shadow: 0 0 60px rgba(0, 0, 0, 0.25);
 `;
 
 const Trigger = styled.div`
@@ -27,16 +25,16 @@ const Trigger = styled.div`
 const SwitchContainer = styled.div`
   height: 30px;
   width: 60px;
-  background-color: ${Colours.blackLight.one};
+  background-color: ${Colours.purpleDark.four};
   border-radius: 5px;
   cursor: pointer;
   overflow: hidden;
   transition: background-color 0.5s ease;
   :hover {
-    background-color: ${Colours.blackLight.three};
+    background-color: ${Colours.purpleDark.five};
   }
   :hover ${Trigger} {
-    background-color: ${Colours.whiteLight.one};
+    background-color: ${Colours.whiteLight.three};
   }
 `;
 
@@ -64,16 +62,16 @@ export default class TEMPLATE extends React.Component<Props, State> {
   TriggerRef: React.RefObject<HTMLDivElement> = React.createRef();
 
   state: State = {
-    switch: true
+    switch: true,
   };
 
   click = async () => {
     if (this.TriggerRef.current) {
       TweenLite.to(this.TriggerRef.current, 1, {
         css: {
-          transform: `translateX(${this.state.switch ? '0px' : '30px'})`
+          transform: `translateX(${this.state.switch ? "0px" : "30px"})`,
         },
-        ease: Power4.easeOut
+        ease: Power4.easeOut,
       });
       await this.setState({ switch: !this.state.switch });
       this.props.setState(this.state.switch);
@@ -86,8 +84,8 @@ export default class TEMPLATE extends React.Component<Props, State> {
         <Text
           style={{
             color: !this.state.switch
-              ? Colours.blackDark.four
-              : Colours.whiteDark.five
+              ? Colours.whiteLight.one
+              : Colours.purpleLight.one,
           }}
         >
           2P
@@ -100,8 +98,8 @@ export default class TEMPLATE extends React.Component<Props, State> {
         <Text
           style={{
             color: this.state.switch
-              ? Colours.blackDark.four
-              : Colours.whiteDark.five
+              ? Colours.whiteLight.one
+              : Colours.purpleLight.one,
           }}
         >
           AI
