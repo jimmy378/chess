@@ -9,10 +9,10 @@ import Chess from "chess";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import Canvas from "../components/canvas";
-import Board from "../components/board";
-import Pieces from "../components/pieces";
-import TakenPieces from "../components/takenPieces";
+import Canvas from "../components/Canvas";
+import Board from "../components/Board";
+import Pieces from "../components/Pieces";
+import TakenPieces from "../components/TakenPieces";
 import Switch from "../components/Switch";
 import Slider from "../components/Slider";
 import TextBox from "../components/TextBox";

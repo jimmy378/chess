@@ -1,20 +1,20 @@
-import React, { ReactElement } from 'react';
-import ReactDOM from 'react-dom';
+import React, { ReactElement } from "react";
+import ReactDOM from "react-dom";
 
-import Pawn from './pawn';
-import Rook from './rook';
-import KnightWhite from './knightWhite';
-import KnightBlack from './knightBlack';
-import Bishop from './bishop';
-import Queen from './queen';
-import King from './king';
+import Pawn from "./Pawn";
+import Rook from "./Rook";
+import KnightWhite from "./KnightWhite";
+import KnightBlack from "./KnightBlack";
+import Bishop from "./Bishop";
+import Queen from "./Queen";
+import King from "./King";
 
-import { piece, colour, PieceObject } from '../util/model';
-import { getPosFromCoords } from '../util';
-import { connect } from 'react-redux';
-import { AppState } from '../store/ApplicationState';
-import { Actions, ConnectedReduxThunkProps } from '../store';
-import Chess from 'chess';
+import { piece, colour, PieceObject } from "../util/model";
+import { getPosFromCoords } from "../util";
+import { connect } from "react-redux";
+import { AppState } from "../store/ApplicationState";
+import { Actions, ConnectedReduxThunkProps } from "../store";
+import Chess from "chess";
 
 type Props = {
   piece: PieceObject;
@@ -36,7 +36,7 @@ class DragContainer extends React.Component<Props, State> {
     truePosition: [0, 0],
     dragging: false,
     piecesBeforeDrag: [],
-    pickedUP: false
+    pickedUP: false,
   };
 
   onMouseMove = (e: MouseEvent) => {
@@ -46,7 +46,7 @@ class DragContainer extends React.Component<Props, State> {
     let CTM = this.props.svgRef.getScreenCTM();
     let pos: [number, number] = [
       (e.clientX - CTM!.e) / CTM!.a,
-      (e.clientY - CTM!.f) / CTM!.d
+      (e.clientY - CTM!.f) / CTM!.d,
     ];
     this.setState({ truePosition: pos });
     this.setState({ mousePosition: [pos[0] - 60, pos[1] - 120] });
@@ -59,7 +59,7 @@ class DragContainer extends React.Component<Props, State> {
     let CTM = this.props.svgRef.getScreenCTM();
     let pos: [number, number] = [
       (e.touches[0].clientX - CTM!.e) / CTM!.a,
-      (e.touches[0].clientY - CTM!.f) / CTM!.d
+      (e.touches[0].clientY - CTM!.f) / CTM!.d,
     ];
     this.setState({ truePosition: pos });
     this.setState({ mousePosition: [pos[0] - 60, pos[1] - 120] });
@@ -74,8 +74,8 @@ class DragContainer extends React.Component<Props, State> {
     this.setState({ piecesBeforeDrag: this.props.Game.Pieces });
     this.props.dispatch(Actions.Game.setActiveTiles([...possibleMoves]));
     this.props.dispatch(Actions.Game.movePieceToFront.action(this.props.piece));
-    window.addEventListener('mousemove', this.onMouseMove);
-    window.addEventListener('touchmove', this.onTouchMove);
+    window.addEventListener("mousemove", this.onMouseMove);
+    window.addEventListener("touchmove", this.onTouchMove);
   };
 
   onDrop = () => {
@@ -83,8 +83,8 @@ class DragContainer extends React.Component<Props, State> {
 
     let highlightedTile = getPosFromCoords(this.state.truePosition);
 
-    window.removeEventListener('mousemove', this.onMouseMove);
-    window.removeEventListener('touchmove', this.onTouchMove);
+    window.removeEventListener("mousemove", this.onMouseMove);
+    window.removeEventListener("touchmove", this.onTouchMove);
     this.setState({ dragging: false, pickedUP: false });
 
     let possibleMoves = Chess.findMoves(
@@ -92,10 +92,10 @@ class DragContainer extends React.Component<Props, State> {
       this.props.piece.gameBoardPosition
     );
 
-    if ([...possibleMoves].findIndex(x => x === highlightedTile) !== -1) {
+    if ([...possibleMoves].findIndex((x) => x === highlightedTile) !== -1) {
       let newBoard = Chess.applyMove(this.props.Game.Board, [
         this.props.piece.gameBoardPosition,
-        highlightedTile!
+        highlightedTile!,
       ]);
       this.props.dispatch(Actions.Game.setBoard.action(newBoard, false, false));
     } else {

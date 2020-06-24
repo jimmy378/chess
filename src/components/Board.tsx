@@ -1,9 +1,9 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { AppState } from '../store/ApplicationState';
-import { Actions, ConnectedReduxThunkProps } from '../store';
+import React from "react";
+import { connect } from "react-redux";
+import { AppState } from "../store/ApplicationState";
+import { Actions, ConnectedReduxThunkProps } from "../store";
 
-import Tile from './tile';
+import Tile from "./Tile";
 
 type Props = {} & AppState & ConnectedReduxThunkProps;
 
@@ -12,7 +12,7 @@ type State = {};
 class Board extends React.Component<Props, State> {
   render() {
     return (
-      <g transform={'translate(800 230)'}>
+      <g transform={"translate(800 230)"}>
         {[0, 8, 16, 24, 32, 40, 48, 56].map((row, rowIndex) => (
           <g
             transform={`translate(${rowIndex * -100} ${rowIndex * 58})`}

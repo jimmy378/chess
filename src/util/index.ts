@@ -1,15 +1,15 @@
-export * from './styledComponents';
-export * from './theme';
+export * from "./styledComponents";
+export * from "./theme";
 
-import Chess from 'chess';
-import { CenterCoords, colour, piece, Coords, PieceObject } from './model';
-import pieces from '../components/pieces';
+import Chess from "chess";
+import { CenterCoords, colour, piece, Coords, PieceObject } from "./model";
+import pieces from "../components/Pieces";
 
 export const getPosFromCoords = (
   coords: [number, number]
 ): number | undefined => {
   let index = CenterCoords.findIndex(
-    x =>
+    (x) =>
       x[0] < coords[0] + 50 &&
       x[0] > coords[0] - 50 &&
       x[1] < coords[1] + 50 &&
@@ -46,8 +46,8 @@ export const getPieces = (gameBoard: Uint8Array) => {
             name: piece.pawn,
             position: Coords[i] as [number, number],
             gameBoardPosition: i,
-            isTurn: whitesMove === 'W',
-            id: `${piece.pawn}-${colour.White}-${WhitePawnIterator}`
+            isTurn: whitesMove === "W",
+            id: `${piece.pawn}-${colour.White}-${WhitePawnIterator}`,
           });
           WhitePawnIterator++;
           break;
@@ -57,8 +57,8 @@ export const getPieces = (gameBoard: Uint8Array) => {
             name: piece.Rook,
             position: Coords[i] as [number, number],
             gameBoardPosition: i,
-            isTurn: whitesMove === 'W',
-            id: `${piece.Rook}-${colour.White}-${WhiteRookIterator ? 1 : 0}`
+            isTurn: whitesMove === "W",
+            id: `${piece.Rook}-${colour.White}-${WhiteRookIterator ? 1 : 0}`,
           });
           WhiteRookIterator = true;
           break;
@@ -68,8 +68,10 @@ export const getPieces = (gameBoard: Uint8Array) => {
             name: piece.Knight,
             position: Coords[i] as [number, number],
             gameBoardPosition: i,
-            isTurn: whitesMove === 'W',
-            id: `${piece.Knight}-${colour.White}-${WhiteKnightIterator ? 1 : 0}`
+            isTurn: whitesMove === "W",
+            id: `${piece.Knight}-${colour.White}-${
+              WhiteKnightIterator ? 1 : 0
+            }`,
           });
           WhiteKnightIterator = true;
           break;
@@ -79,8 +81,10 @@ export const getPieces = (gameBoard: Uint8Array) => {
             name: piece.Bishop,
             position: Coords[i] as [number, number],
             gameBoardPosition: i,
-            isTurn: whitesMove === 'W',
-            id: `${piece.Bishop}-${colour.White}-${WhiteBishopIterator ? 1 : 0}`
+            isTurn: whitesMove === "W",
+            id: `${piece.Bishop}-${colour.White}-${
+              WhiteBishopIterator ? 1 : 0
+            }`,
           });
           WhiteBishopIterator = true;
           break;
@@ -90,8 +94,8 @@ export const getPieces = (gameBoard: Uint8Array) => {
             name: piece.Queen,
             position: Coords[i] as [number, number],
             gameBoardPosition: i,
-            isTurn: whitesMove === 'W',
-            id: `${piece.Queen}-${colour.White}-0`
+            isTurn: whitesMove === "W",
+            id: `${piece.Queen}-${colour.White}-0`,
           });
           break;
         case Chess.codes.pieces.white.king:
@@ -100,8 +104,8 @@ export const getPieces = (gameBoard: Uint8Array) => {
             name: piece.King,
             position: Coords[i] as [number, number],
             gameBoardPosition: i,
-            isTurn: whitesMove === 'W',
-            id: `${piece.King}-${colour.White}-0`
+            isTurn: whitesMove === "W",
+            id: `${piece.King}-${colour.White}-0`,
           });
           break;
         default:
@@ -115,8 +119,8 @@ export const getPieces = (gameBoard: Uint8Array) => {
             name: piece.pawn,
             position: Coords[i] as [number, number],
             gameBoardPosition: i,
-            isTurn: whitesMove !== 'W',
-            id: `${piece.pawn}-${colour.Black}-${BlackPawnIterator}`
+            isTurn: whitesMove !== "W",
+            id: `${piece.pawn}-${colour.Black}-${BlackPawnIterator}`,
           });
           BlackPawnIterator++;
           break;
@@ -126,8 +130,8 @@ export const getPieces = (gameBoard: Uint8Array) => {
             name: piece.Rook,
             position: Coords[i] as [number, number],
             gameBoardPosition: i,
-            isTurn: whitesMove !== 'W',
-            id: `${piece.Rook}-${colour.Black}-${BlackRookIterator ? 1 : 0}`
+            isTurn: whitesMove !== "W",
+            id: `${piece.Rook}-${colour.Black}-${BlackRookIterator ? 1 : 0}`,
           });
           BlackRookIterator = true;
           break;
@@ -137,8 +141,10 @@ export const getPieces = (gameBoard: Uint8Array) => {
             name: piece.Knight,
             position: Coords[i] as [number, number],
             gameBoardPosition: i,
-            isTurn: whitesMove !== 'W',
-            id: `${piece.Knight}-${colour.Black}-${BlackKnightIterator ? 1 : 0}`
+            isTurn: whitesMove !== "W",
+            id: `${piece.Knight}-${colour.Black}-${
+              BlackKnightIterator ? 1 : 0
+            }`,
           });
           BlackKnightIterator = true;
           break;
@@ -148,8 +154,10 @@ export const getPieces = (gameBoard: Uint8Array) => {
             name: piece.Bishop,
             position: Coords[i] as [number, number],
             gameBoardPosition: i,
-            isTurn: whitesMove !== 'W',
-            id: `${piece.Bishop}-${colour.Black}-${BlackBishopIterator ? 1 : 0}`
+            isTurn: whitesMove !== "W",
+            id: `${piece.Bishop}-${colour.Black}-${
+              BlackBishopIterator ? 1 : 0
+            }`,
           });
           BlackBishopIterator = true;
           break;
@@ -159,8 +167,8 @@ export const getPieces = (gameBoard: Uint8Array) => {
             name: piece.Queen,
             position: Coords[i] as [number, number],
             gameBoardPosition: i,
-            isTurn: whitesMove !== 'W',
-            id: `${piece.Queen}-${colour.Black}-0`
+            isTurn: whitesMove !== "W",
+            id: `${piece.Queen}-${colour.Black}-0`,
           });
           break;
         case Chess.codes.pieces.black.king:
@@ -169,8 +177,8 @@ export const getPieces = (gameBoard: Uint8Array) => {
             name: piece.King,
             position: Coords[i] as [number, number],
             gameBoardPosition: i,
-            isTurn: whitesMove !== 'W',
-            id: `${piece.King}-${colour.Black}-0`
+            isTurn: whitesMove !== "W",
+            id: `${piece.King}-${colour.Black}-0`,
           });
           break;
         default:
@@ -208,22 +216,24 @@ export const getPiecesFromBoard = (
       }
     }
 
-    Pieces.filter(Piece => {
+    Pieces.filter((Piece) => {
       let newPiece: PieceObject = Piece;
       newPiece.isTurn = !Piece.isTurn;
       return newPiece;
     });
 
-    let index = Pieces.findIndex(x => x.gameBoardPosition === originalPosition);
+    let index = Pieces.findIndex(
+      (x) => x.gameBoardPosition === originalPosition
+    );
     if (index !== -1) {
       let newPiece: PieceObject = {
         ...Pieces[index],
         gameBoardPosition: newPosition,
         position: Coords[newPosition] as [number, number],
-        isTurn: false
+        isTurn: false,
       };
       let indexDelete = Pieces.findIndex(
-        x => x.gameBoardPosition === newPosition
+        (x) => x.gameBoardPosition === newPosition
       );
       Pieces[index] = newPiece;
       if (indexDelete !== -1) {
